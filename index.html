@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <style>
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        line-height: 1.6;
+        background-color: #f4f6f9;
+        color: #000000;
+      }
+
+      /* Navigation Styling */
+      nav {
+        background: linear-gradient(135deg, #e8669a 0%, #4ccec3 100%);
+        padding: 1rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .box {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        gap: 2rem;
+      }
+
+      .box li a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .box li a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: rgb(125, 56, 162);
+        transition: width 0.3s ease;
+      }
+
+      .box li a:hover {
+        color: #861bbb;
+      }
+
+      .box li a:hover::after {
+        width: 100%;
+      }
+
+      /* Profile Picture */
+      .pic {
+        display: block;
+        width: 150px;
+        height: 150px;
+        border-radius: 30%;
+        object-fit: cover;
+        margin: 2rem auto;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        border: 3px solid #b95eae;
+        transition: transform 0.3s ease;
+        margin-right: 970px;
+        position: absolute;
+        right: 50px;
+        top: 100px;
+      }
+
+      .pic:hover {
+        transform: scale(1.05);
+      }
+
+      /* Animated Text */
+      .animated-text {
+        font-size: 2rem;
+        text-align: center;
+        background: linear-gradient(45deg, #d076d8, #599aea);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 700;
+        margin: 2rem 0;
+        animation: textReveal 1.5s ease-out;
+        margin-left: 700px;
+      }
+
+      @keyframes textReveal {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Sections */
+      section {
+        position: relative;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 2rem;
+        padding-right: 250px; /* Make space for the image */
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-right: 250px; /* Auto margins for centering */
+        margin-left: auto;
+        padding-right: 2rem; /* Reduce right padding */
+        padding-left: 2rem;
+      }
+
+      section:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+      .heading {
+        text-align: center;
+        color: #10829fbb;
+        font-size: 40px;
+        font-weight: bold;
+        font-family: "Great Vibes", cursive; /* Elegant script font */
+        letter-spacing: 1px;
+        text-shadow: 4px 4px 8px rgba(166, 83, 4, 0.4);
+        display: inline-block;
+        padding-bottom: 5px;
+        margin-bottom: 0px;
+        text-align: center;
+      }
+
+      /* Skills Table */
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      table th {
+        background: linear-gradient(135deg, #d093d6 0%, #81afe7 100%);
+        color: white;
+        padding: 12px;
+        text-align: left;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+
+      table tr:hover {
+        background-color: #e9ecef;
+      }
+
+      /* Projects */
+      .projects-container h2 {
+        text-align: center;
+        color: #d076d8;
+        margin-bottom: 1rem;
+      }
+
+      .projects-container ol {
+        list-style-type: none;
+        counter-reset: item;
+      }
+
+      .projects-container li {
+        counter-increment: item;
+        position: relative;
+        margin-bottom: 1rem;
+        padding-left: 40px;
+        font-weight: 600;
+      }
+
+      .projects-container li::before {
+        content: counter(item) ".";
+        position: absolute;
+        left: 0;
+        color: #d076d8;
+        font-weight: bold;
+      }
+
+      /* Contact Section */
+      #contact .cpic {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      .hyper {
+        color: #861bbb;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .hyper:hover {
+        color: #a67bbb;
+        text-decoration: underline;
+      }
+
+      .highlight {
+        color: #d076d8; /* Deep blue */
+        font-weight: bold;
+        font-size: 18px;
+      }
+      /* Form Styling */
+      form {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      form input,
+      form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+      }
+
+      form input:focus,
+      form textarea:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      form button {
+        display: block;
+        width: 30%;
+        padding: 12px;
+        background: linear-gradient(135deg, #e8669a 0%, #4ccec3 100%);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        margin: 0 auto;
+      }
+
+      form button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+      video {
+        width: 100%; /* Makes video responsive */
+        max-width: 600px; /* Adjust max width as needed */
+        height: auto; /* Maintain aspect ratio */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow */
+        outline: none; /* Removes default focus outline */
+        display: block; /* Ensures proper spacing */
+        margin: 20px auto; /* Centers the video */
+      }
+      /* Tablet and Mobile Responsiveness */
+      @media (max-width: 1024px) {
+        .box {
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+
+        .pic {
+          position: static;
+          margin: 1rem auto;
+          width: 120px;
+          height: 120px;
+        }
+
+        .animated-text {
+          font-size: 1.8rem;
+          text-align: center;
+          margin-left: 0;
+        }
+
+        section {
+          max-width: 90%;
+          padding: 1.5rem;
+          margin: 1rem auto;
+        }
+
+        form {
+          max-width: 90%;
+          padding: 1.5rem;
+        }
+
+        form button {
+          width: 100%;
+        }
+      }
+
+      /* Mobile View */
+      @media (max-width: 768px) {
+        nav {
+          text-align: center;
+        }
+
+        .box {
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .pic {
+          width: 100px;
+          height: 100px;
+        }
+
+        .animated-text {
+          font-size: 1.5rem;
+        }
+
+        .heading {
+          font-size: 30px;
+        }
+
+        section {
+          width: 95%;
+          padding: 1rem;
+        }
+
+        table {
+          font-size: 14px;
+        }
+
+        form {
+          padding: 1rem;
+        }
+
+        form input,
+        form textarea {
+          font-size: 14px;
+        }
+
+        form button {
+          width: 100%;
+        }
+
+        video {
+          width: 100%;
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <nav>
+        <ul class="box">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div>
+      <div class="picsection">
+        <img src="haiqua's pic.jpeg" alt="profile pic" class="pic" />
+        <p class="animated-text">
+          Welcome! Here’s a glimpse into my work and passion for web
+          development.
+        </p>
+      </div>
+
+      <section id="home">
+        <h1 class="heading">Home</h1>
+        <!-- <p class="animated-text">
+          Welcome! Here’s a glimpse into my work and passion for web
+          development.
+        </p> -->
+        <p>
+          Hi, I’m
+          <b>Haiqua Munir, a Full Stack Developer</b> passionate about building
+          responsive and interactive web applications. With expertise in
+          front-end and back-end development, I create seamless user experiences
+          using technologies like React, JavaScript, HTML, CSS, and databases. I
+          love solving problems, optimizing performance, and continuously
+          learning new technologies. Welcome to my portfolio!
+        </p>
+      </section>
+
+      <section id="about">
+        <h1 class="heading">About</h1>
+        <p>
+          I am a software engineering student in my 5th semester, actively
+          working on projects that enhance my coding and problem-solving skills.
+          My journey started with basic programming, and now I develop dynamic
+          web applications with a focus on user experience and functionality.
+        </p>
+      </section>
+      <section id="skills">
+        <h1 class="heading">Skills</h1>
+        <table>
+          <tr>
+            <th>Indexing</th>
+            <th>Skills</th>
+            <th>Proficiency</th>
+            <th>Experience (Years)</th>
+          </tr>
+          <tr>
+            <td>I</td>
+            <td>C++</td>
+            <td>Advanced</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>II</td>
+            <td>Java</td>
+            <td>Advanced</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>III</td>
+            <td>HTML</td>
+            <td>Advanced</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>IV</td>
+            <td>CSS</td>
+            <td>Advanced</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>V</td>
+            <td>JavaScript</td>
+            <td>Intermediate</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>VI</td>
+            <td>React</td>
+            <td>Intermediate</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>VII</td>
+            <td>OOP</td>
+            <td>Advanced</td>
+            <td>3</td>
+          </tr>
+          <tr>
+            <td>VIII</td>
+            <td>DSA</td>
+            <td>Intermediate</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>IX</td>
+            <td>DBMS</td>
+            <td>Advanced</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>X</td>
+            <td>MySQL</td>
+            <td>Advanced</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>XI</td>
+            <td>MS SQL</td>
+            <td>Advanced</td>
+            <td>2</td>
+          </tr>
+          <tr>
+            <td>XII</td>
+            <td>Python</td>
+            <td>Basic</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>XIII</td>
+            <td>Git & GitHub</td>
+            <td>Intermediate</td>
+            <td>2</td>
+          </tr>
+        </table>
+      </section>
+      <section id="projects">
+        <div class="projects-container">
+          <h1 class="heading">My Projects</h1>
+          <ol>
+            <li class="highlight">Tic-Tac-Toe Game (Java)</li>
+            <p>
+              A console-based game implementing OOP concepts. Features win/draw
+              detection and a replay option.
+            </p>
+
+            <li class="highlight">Online Food Ordering System (DSA)</li>
+            <p>
+              A structured system using data structures. Uses queues for order
+              processing and searching for menu navigation.
+            </p>
+
+            <li class="highlight">Hotel Booking System (OOP)</li>
+            <p>
+              A Java-based hotel reservation platform. Supports authentication,
+              room availability tracking, and booking management.
+            </p>
+
+            <li class="highlight">Technology Brochure Website</li>
+            <p>
+              An informative webpage designed using HTML & CSS. Provides
+              insights into various technologies.
+            </p>
+
+            <li class="highlight">Responsive Food Ordering Platform</li>
+            <p>
+              A web-based food ordering interface. Built using HTML, CSS, and
+              JavaScript for interactivity.
+            </p>
+
+            <li class="highlight">Portfolio Website</li>
+            <p>
+              A React-based personal portfolio showcasing my skills and
+              projects. Includes an about section and contact info.
+            </p>
+
+            <li class="highlight">Dynamic Image Gallery</li>
+            <p>
+              An image gallery with filtering and lightbox features. Built with
+              React for a modern user experience.
+            </p>
+
+            <li class="highlight">Book Reading & Review Platform</li>
+            <p>
+              A platform where users can submit, review, and rate books.
+              Includes community discussions.
+            </p>
+
+            <li class="highlight">Blog Website</li>
+            <p>
+              A blogging platform where users can write and share articles.
+              Features commenting and a responsive layout.
+            </p>
+          </ol>
+          <video
+            src="WhatsApp Video 2025-03-06 at 10.13.16 PM.mp4"
+            controls
+          ></video>
+        </div>
+      </section>
+      <section id="contact">
+        <h1 class="heading">Contact Me</h1>
+        <p>
+          <img src="contact.png" alt="contact" class="cpic" /><a
+            href="tel:03259562384"
+            class="hyper"
+            >0325-9562384</a
+          >
+        </p>
+        <p>
+          <img src="linkedin.png" alt="linkedin" class="cpic" /><a
+            class="hyper"
+            href="https://www.linkedin.com/in/haiqua-munir-665443266"
+            target="_blank"
+          >
+            www.linkedin.com/in/haiqua-munir-665443266
+          </a>
+        </p>
+        <p>
+          <img src="gmail.jpeg" alt="gmail" class="cpic" /><a
+            href="mailto:haiquamunir@gmail.com"
+            class="hyper"
+            >haiquamunir@gmail.com</a
+          >
+        </p>
+        <form action="index.html">
+          <p>
+            Name
+            <input
+              type="text"
+              name="name"
+              placeholder="Enter your full name"
+              required
+            />
+          </p>
+          <p>
+            Email
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              required
+            />
+          </p>
+          <p>
+            Message
+            <textarea
+              name="message"
+              placeholder="Enter your message here"
+              required
+            ></textarea>
+          </p>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
